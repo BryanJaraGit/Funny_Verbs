@@ -13,7 +13,7 @@ body{
     line-height: 1.6;
 }
 
-.title h2{
+.title {
     margin-top: 50px;
     text-align: center;
 }
@@ -26,20 +26,18 @@ body{
     display: block;
 }
 
-.rightAnswer .rightAnswer:hover{
-    background-color: #6ab04c;
-    border-color: #6ab04c;
-    color: #fff;
+.rightAnswer {
+    background-color: #6ab04c !important;
+    color: #fff !important;
 }
 
-.wrongAnswer .wrongAnswer:hover{
-    background-color: #b33030;
-    border-color: #b33030;
-    color: #fff;
+.wrongAnswer {
+    background-color: #b33030 !important;
+    color: #fff !important;
 }
 
-.next{
-    margin: 10rem;
+#next{
+    margin: 3rem;
     cursor: pointer;
     color: #6ab04c;
 }
