@@ -1,3 +1,4 @@
+// Cargamos todas las id's de nuestro archivo index.html
 const ShowVerb = document.getElementById('ShowVerb');
 const ShowImage = document.getElementById('ShowImage');
 const ShowAudio = document.getElementById('ShowAudio');
@@ -12,16 +13,18 @@ const next = document.getElementById('next');
 const verbsCounter = document.getElementById('verbs-counter');
 const allRightCounter = document.getElementById('all-right-answer');
 const verbsContainer = document.getElementById('verbs-container');
-const conta = document.getElementById('cronometro'); 
+const crono = document.getElementById('cronometro'); 
 
 const numberOfVerbs = verbs.length;
 
+// Nombramos nuestras variables
 let answerRoullete = [0,1,1,1];
 let everyNumberOfVerb = [];
 let rightAnswer;
 let rightAnswersCounter = 0;
 let cronometro = 0;
 
+// Se ejecuta el evento al hacer click en play to start
 next.addEventListener('click', function(){
     ponerVerbo();
     next.style.display = 'none';
@@ -29,6 +32,7 @@ next.addEventListener('click', function(){
     // ShowVerb.innerHTML = "Hola";
 });
 
+// Creamos una lista random de manera ordenada
 makeRandomList();
 
 let lastPosition = numberOfVerbs -1;
@@ -58,6 +62,8 @@ function makeRandomList(){
 //     },1000);
 // }
 
+
+// Accion del boton para las respuestas correctas e incorrectas validadas
 function buttonEffect(itsRight, button) {
     if(itsRight === true){
         if(button == 1) first.classList.add("rightAnswer");
@@ -98,12 +104,12 @@ function buttonEffect(itsRight, button) {
     }
     setTimeout(function(){
         ponerVerbo();
-    },1000);
+    },2000);
 }
 
 
 
-
+// Eventos que se ejecutan al dar click en los botones
 first.addEventListener('click', function(){
     buttonEffect(isItRight_(first.innerHTML), 1);
 });
@@ -120,6 +126,7 @@ fourth.addEventListener('click', function(){
     buttonEffect(isItRight_(fourth.innerHTML), 4);
 });
 
+// Funcion para definir la respuesta correcta con un arreglo
 function shuffleAnswers(array){
     let numberOfAnswersButtons = array.length;
     let randomIndex;
@@ -134,15 +141,19 @@ function shuffleAnswers(array){
     return array;
 }
 
-function isItRight_(answer){
-    return answer == rightAnswer?true:false;
-}
+// Funcion para validar respuesta correcta o incorrecta
+const isItRight_ = (answer) => { return answer == rightAnswer ? true: false; }
+    // function isItRight_(answer){
+    //     return answer == rightAnswer?true:false;
+    // }
 
+// Generamos un verbo de manera aleatoria por toda la canditad de verbos agregados
 function randomVerbo(notThisOne){
     thenOne = Math.floor(Math.random()*verbos.length);
     return thenOne == notThisOne ? randomVerbo(notThisOne) : thenOne;
 }
 
+// Agregamos los verbos, contador, audios e imagenes.
 function ponerVerbo(){
     cronometro = -1;
 
@@ -158,7 +169,7 @@ function ponerVerbo(){
     if(lastPosition >= 0){
         var just_position = lastPosition + 1;
         verbsCounter.innerHTML = ""+just_position+" / "+numberOfVerbs;
-        allRightCounter.innerHTML = "Right answer: "+rightAnswersCounter;
+        allRightCounter.innerHTML = "Score: "+rightAnswersCounter;
 
         ShowVerb.innerHTML = verbs[randomPosition];
         ShowImage.innerHTML = imgText;
@@ -176,24 +187,26 @@ function ponerVerbo(){
         lastPosition = lastPosition-1;
     }else{
         verbsCounter.innerHTML = "0 / "+numberOfVerbs;
-        allRightCounter.innerHTML = "Right answers: "+rightAnswersCounter;
+        allRightCounter.innerHTML = "Total score: "+rightAnswersCounter;
         ShowVerb.innerHTML = "Thx!";
         verbsContainer.innerHTML = "";
     }
 
 }
 
+// Creamos una funcion de cronometro para cada pregunta cada 5 segundos
 const contarPregunta = () => {
     
-    window.setInterval(() =>{
+    window.setInterval(() => {
         if(cronometro != 5){
+            
             cronometro++;
-            conta.innerHTML = cronometro;
+            crono.innerHTML = cronometro;
         }else {
             cronometro = 0;
             ponerVerbo();
         }
 
-
     },1000); 
+    contarPregunta.stop
 }

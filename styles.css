@@ -41,3 +41,16 @@ body{
     cursor: pointer;
     color: #6ab04c;
 }
+
+#timer{
+    position: absolute;
+    left: 45%;
+    transform: translatex(-50%)
+}
+
+#cronometro{
+    position: absolute;
+    left: 50%;
+    transform: translatex(-50%)
+}
+
